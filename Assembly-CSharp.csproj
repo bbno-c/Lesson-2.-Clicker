@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MouseCoordinates.cs" />
-    <Compile Include="Assets\Scripts\OnCubeCollide.cs" />
+    <Compile Include="Assets\Scripts\OnCubeCollides.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Oleg/The Clicker/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
