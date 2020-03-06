@@ -10,8 +10,8 @@ public class spawner : MonoBehaviour
     public GameObject DisplayScore;
     public GameObject[] amount;
     public static int Destroyed;
+    public static float delta;
     public float speed;
-    public float delta;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class spawner : MonoBehaviour
     private void Update()
     {
         delta += Time.deltaTime;
-        if (delta > speed / 1)
+        if (delta > speed)
         {
             Vector3 screen_point = Camera.main.ScreenToWorldPoint(
                 new Vector2(Random.Range(3f, Camera.main.pixelWidth-3), Random.Range(3f, Camera.main.pixelHeight-3)));
@@ -29,7 +29,7 @@ public class spawner : MonoBehaviour
             delta = 0;
 
             if(Destroyed>10)
-                speed -= 0.0001f;
+                speed -= 0.01f;
 
             amount = GameObject.FindGameObjectsWithTag("Cube_entity");
             if (amount.Length > 10)
