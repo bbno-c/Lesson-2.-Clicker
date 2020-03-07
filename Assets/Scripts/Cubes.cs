@@ -6,7 +6,7 @@ public class Cubes : MonoBehaviour
 {
     public bool flag;
     public int temp;
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Cube_entity")
         {
@@ -15,7 +15,7 @@ public class Cubes : MonoBehaviour
             //gameObject.transform.localScale += new Vector3(1,1,1);
             Destroy(collision.gameObject);
         }
-    }
+    }*/
 
     private void OnMouseDown()
     {

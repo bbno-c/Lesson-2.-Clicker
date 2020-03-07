@@ -13,10 +13,12 @@ public class spawner : MonoBehaviour
     public static float delta;
     public float show_del;
     public float speed;
+    public int temp;
+    public bool flag;
 
     void Start()
     {
-        speed = 2;
+        speed = 3;
     }
 
     private void Update()
@@ -30,8 +32,16 @@ public class spawner : MonoBehaviour
             Instantiate(Cube, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
             delta = 0;
 
-            if(Destroyed>10)
-                speed -= 0.01f;
+            if (temp != Destroyed / 10)
+            {
+                temp = Destroyed / 10;
+                flag = true;
+            }
+            if (flag)
+            {
+                speed -= 0.05f;
+                flag = false;
+            }                
 
             amount = GameObject.FindGameObjectsWithTag("Cube_entity");
             if (amount.Length > 10)
