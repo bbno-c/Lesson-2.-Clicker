@@ -40,7 +40,7 @@ public class Cubes : MonoBehaviour
             gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
             flag = false;
         }
-        if (gameObject.transform.localScale.x > 5)
+        if (gameObject.transform.localScale.x > 3)
         {
             Destroy(gameObject);
         }
