@@ -313,7 +313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &964109371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -435,6 +435,7 @@ MonoBehaviour:
   Cube: {fileID: 3028305257134886276, guid: 17304c4d0cfd0e14290d70bc383193ff, type: 3}
   DisplayScore: {fileID: 1707909069}
   amount: []
+  show_del: 0
   speed: 0
 --- !u!1 &1556990706
 GameObject:
