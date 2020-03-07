@@ -434,8 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cube: {fileID: 3028305257134886276, guid: 17304c4d0cfd0e14290d70bc383193ff, type: 3}
   DisplayScore: {fileID: 1707909069}
+  amount: []
   speed: 0
-  delta: 0
 --- !u!1 &1556990706
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ Canvas:
   m_GameObject: {fileID: 1556990706}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 963194227}
   m_PlaneDistance: 10
   m_PixelPerfect: 0

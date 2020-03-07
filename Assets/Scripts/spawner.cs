@@ -11,16 +11,18 @@ public class spawner : MonoBehaviour
     public GameObject[] amount;
     public static int Destroyed;
     public static float delta;
+    public float show_del;
     public float speed;
 
     void Start()
     {
-        speed = 1;
+        speed = 2;
     }
 
     private void Update()
     {
         delta += Time.deltaTime;
+        show_del = delta;
         if (delta > speed)
         {
             Vector3 screen_point = Camera.main.ScreenToWorldPoint(
@@ -39,6 +41,7 @@ public class spawner : MonoBehaviour
                     GameObject.Destroy(cube_entity);
                 }
                 Destroyed = 0;
+                speed = 3;
             }
         }
 
