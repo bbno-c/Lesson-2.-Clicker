@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class spawner : MonoBehaviour
 {
-    [SerializeField]
     public GameObject Cube;
+    private GameObject _InstanceObj;
     public GameObject DisplayScore;
     public GameObject[] amount;
-    public static int Destroyed;
-    public static float delta;
-    public float show_del;
+    [SerializeField] public int Destroyed;
+    public float delta;
     public float speed;
     public int temp;
     public bool flag;
@@ -24,12 +23,15 @@ public class spawner : MonoBehaviour
     private void Update()
     {
         delta += Time.deltaTime;
-        show_del = delta;
         if (delta > speed)
         {
             Vector3 screen_point = Camera.main.ScreenToWorldPoint(
-                new Vector2(Random.Range(3f, Camera.main.pixelWidth-3), Random.Range(3f, Camera.main.pixelHeight-3)));
-            Instantiate(Cube, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
+                new Vector2(
+                    Random.Range(3f, Camera.main.pixelWidth-3),
+                    Random.Range(3f, Camera.main.pixelHeight-3))
+                );
+            _InstanceObj = Instantiate(Cube, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
+            _InstanceObj.transform.parent = gameObject.transform;
             delta = 0;
 
             if (temp != Destroyed / 10)
@@ -41,7 +43,7 @@ public class spawner : MonoBehaviour
             {
                 speed -= 0.05f;
                 flag = false;
-            }                
+            }
 
             amount = GameObject.FindGameObjectsWithTag("Cube_entity");
             if (amount.Length > 10)
