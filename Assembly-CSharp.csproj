@@ -65,7 +65,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Cubes.cs" />
     <Compile Include="Assets\Scripts\MouseCoordinates.cs" />
-    <Compile Include="Assets\Scripts\SpawnerInstantiate.cs" />
     <Compile Include="Assets\Scripts\spawner.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Oleg/The Clicker/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

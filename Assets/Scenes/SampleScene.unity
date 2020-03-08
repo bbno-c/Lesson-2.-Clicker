@@ -542,8 +542,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 19.0215, y: 13.181439, z: 1}
-  m_Center: {x: -1.3275089, y: 1.7169547, z: 0}
+  m_Size: {x: 17.83112, y: 10.022353, z: 1}
+  m_Center: {x: 0.00022125244, y: 1.0073056, z: 0}
 --- !u!4 &1036964475
 Transform:
   m_ObjectHideFlags: 0
@@ -774,8 +774,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 19.091827, y: 12.983249, z: 1}
-  m_Center: {x: -1.292345, y: 1.81605, z: 0}
+  m_Size: {x: 17.855663, y: 10.053084, z: 1}
+  m_Center: {x: 0.012493134, y: 0.991941, z: 0}
 --- !u!4 &1610166271
 Transform:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score: 17'
+  m_Text: Text
 --- !u!222 &1707909072
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -944,6 +944,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1556990710}
     m_Modifications:
+    - target: {fileID: 3385043794780396164, guid: 24c59c0a32faa5340be93b6a1e9471f9,
+        type: 3}
+      propertyPath: m_Text
+      value: Text
+      objectReference: {fileID: 0}
     - target: {fileID: 3385043794780396165, guid: 24c59c0a32faa5340be93b6a1e9471f9,
         type: 3}
       propertyPath: m_LocalPosition.x

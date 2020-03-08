@@ -9,7 +9,7 @@ public class spawner : MonoBehaviour
     private GameObject _InstanceObj;
     public GameObject DisplayScore;
     public GameObject[] amount;
-    [SerializeField] public int Destroyed;
+    public int Destroyed;
     public float delta;
     public float speed;
     public int temp;
@@ -17,7 +17,7 @@ public class spawner : MonoBehaviour
 
     void Start()
     {
-        speed = 3;
+        speed = 2;
     }
 
     private void Update()
@@ -53,7 +53,7 @@ public class spawner : MonoBehaviour
                     GameObject.Destroy(cube_entity);
                 }
                 Destroyed = 0;
-                speed = 3;
+                speed = 2;
             }
         }
 

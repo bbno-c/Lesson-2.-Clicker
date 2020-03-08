@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
-    private spawner spawnerScript;
+    [SerializeField] private spawner spawnerScript;
     public float delta;
 
     private void Start()
