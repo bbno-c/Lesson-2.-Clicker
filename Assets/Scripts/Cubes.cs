@@ -15,7 +15,7 @@ public class Cubes : MonoBehaviour
     private void OnMouseDown()
     {
         gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-        _spawnerScript.Destroyed++;
+        _spawnerScript.Score++;
     }
 
     private void Update()

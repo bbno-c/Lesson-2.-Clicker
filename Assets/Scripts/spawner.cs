@@ -6,19 +6,24 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private GameObject _displayScore;
+    [SerializeField] private GameObject _display;
     [SerializeField] private GameObject _instanceObj;
-    [SerializeField] private GameObject[] _amount;
-    [SerializeField] private int _destroyed;
+    [SerializeField] private Text _displayText;
+    [SerializeField] private int _score;
     [SerializeField] private float _delta;
     [SerializeField] private float _speed;
     private int _temp;
     private bool _flag;
 
-    public int Destroyed
+    private void Start()
     {
-        get => _destroyed;
-        set => _destroyed++;
+        _displayText = _display.GetComponent<Text>();
+    }
+
+    public int Score
+    {
+        get => _score;
+        set => _score++;
     }
 
     private void Update()
@@ -38,9 +43,9 @@ public class Spawner : MonoBehaviour
 
             _delta = 0;
 
-            if (_temp != _destroyed / 10)
+            if (_temp != _score / 10)
             {
-                _temp = _destroyed / 10;
+                _temp = _score / 10;
                 _flag = true;
             }
             if (_flag)
@@ -55,11 +60,11 @@ public class Spawner : MonoBehaviour
                 {
                     Destroy(child.gameObject);
                 }
-                _destroyed = 0;
+                _score = 0;
                 _speed = 0;
             }
         }
 
-        _displayScore.GetComponent<Text>().text = "Score: " + _destroyed;
+        _displayText.text = "Score: " + _score;
     }
 }
