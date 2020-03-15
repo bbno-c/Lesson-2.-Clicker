@@ -4,43 +4,34 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
-    [SerializeField] private spawner spawnerScript;
-    public float delta;
+    [SerializeField] private Spawner _spawnerScript;
+    private float _delta;
 
     private void Start()
     {
-        spawnerScript = transform.GetComponentInParent<spawner>();
+        _spawnerScript = transform.GetComponentInParent<Spawner>();
     }
 
     private void OnMouseDown()
     {
         gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-        spawnerScript.Destroyed++;
+        _spawnerScript.Destroyed++;
     }
 
     private void Update()
     {
-        delta += Time.deltaTime;
-        if (delta > 1)
+        _delta += Time.deltaTime;
+
+        if (_delta > 1)
         {
             gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-            delta = 0;
+
+            _delta = 0;
+
             if (gameObject.transform.localScale.x > 3)
             {
                 Destroy(gameObject);
             }
         }
     }
-
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Cube_entity")
-        {
-            //Debug.Log(collision.gameObject.name);
-            //Debug.Log(gameObject.name);
-            //gameObject.transform.localScale += new Vector3(1,1,1);
-            Destroy(collision.gameObject);
-        }
-    }*/
-
 }

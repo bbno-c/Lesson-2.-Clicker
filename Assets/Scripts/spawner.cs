@@ -3,60 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class spawner : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
-    public GameObject Cube;
-    private GameObject _InstanceObj;
-    public GameObject DisplayScore;
-    public GameObject[] amount;
-    public int Destroyed;
-    public float delta;
-    public float speed;
-    public int temp;
-    public bool flag;
+    [SerializeField] private GameObject _cubePrefab;
+    [SerializeField] private GameObject _displayScore;
+    [SerializeField] private GameObject _instanceObj;
+    [SerializeField] private GameObject[] _amount;
+    [SerializeField] private int _destroyed;
+    [SerializeField] private float _delta;
+    [SerializeField] private float _speed;
+    private int _temp;
+    private bool _flag;
+
+    public int Destroyed
+    {
+        get => _destroyed;
+        set => _destroyed++;
+    }
 
     void Start()
     {
-        speed = 2;
+        _speed = 2;
+        _destroyed = 0;
     }
 
     private void Update()
     {
-        delta += Time.deltaTime;
-        if (delta > speed)
+        _delta += Time.deltaTime;
+        if (_delta > _speed)
         {
             Vector3 screen_point = Camera.main.ScreenToWorldPoint(
                 new Vector2(
                     Random.Range(3f, Camera.main.pixelWidth-3),
-                    Random.Range(3f, Camera.main.pixelHeight-3))
+                    Random.Range(3f, Camera.main.pixelHeight-3)
+                    )
                 );
-            _InstanceObj = Instantiate(Cube, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
-            _InstanceObj.transform.parent = gameObject.transform;
-            delta = 0;
 
-            if (temp != Destroyed / 10)
+            _instanceObj = Instantiate(_cubePrefab, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
+            _instanceObj.transform.parent = gameObject.transform;
+
+            _delta = 0;
+
+            if (_temp != _destroyed / 10)
             {
-                temp = Destroyed / 10;
-                flag = true;
+                _temp = _destroyed / 10;
+                _flag = true;
             }
-            if (flag)
+            if (_flag)
             {
-                speed -= 0.05f;
-                flag = false;
+                _speed -= 0.05f;
+                _flag = false;
             }
 
-            amount = GameObject.FindGameObjectsWithTag("Cube_entity");
-            if (amount.Length > 10)
+            _amount = GameObject.FindGameObjectsWithTag("Cube_entity");
+            if (_amount.Length > 10)
             {
-                foreach (GameObject cube_entity in amount)
+                foreach (GameObject cube_entity in _amount)
                 {
                     GameObject.Destroy(cube_entity);
                 }
-                Destroyed = 0;
-                speed = 2;
+                _destroyed = 0;
+                _speed = 2;
             }
         }
 
-        DisplayScore.GetComponent<Text>().text = "Score: " + Destroyed;
+        _displayScore.GetComponent<Text>().text = "Score: " + _destroyed;
     }
 }
