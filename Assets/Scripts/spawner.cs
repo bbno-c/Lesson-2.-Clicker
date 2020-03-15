@@ -49,12 +49,11 @@ public class Spawner : MonoBehaviour
                 _flag = false;
             }
 
-            _amount = GameObject.FindGameObjectsWithTag("Cube_entity");
-            if (_amount.Length > 10)
+            if (transform.childCount > 10)
             {
-                foreach (GameObject cube_entity in _amount)
+                foreach (GameObject gameObject in transform)
                 {
-                    GameObject.Destroy(cube_entity);
+                    Destroy(gameObject);
                 }
                 _destroyed = 0;
                 _speed = 0;
