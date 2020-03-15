@@ -51,9 +51,9 @@ public class Spawner : MonoBehaviour
 
             if (transform.childCount > 10)
             {
-                foreach (GameObject gameObject in transform)
+                foreach (Transform child in transform)
                 {
-                    Destroy(gameObject);
+                    Destroy(child.gameObject);
                 }
                 _destroyed = 0;
                 _speed = 0;
