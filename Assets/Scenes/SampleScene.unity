@@ -196,12 +196,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: 3028305257134886276, guid: 17304c4d0cfd0e14290d70bc383193ff,
     type: 3}
-  _displayScore: {fileID: 1707909069}
+  _display: {fileID: 1707909069}
   _instanceObj: {fileID: 0}
-  _amount: []
-  _destroyed: 0
+  _displayText: {fileID: 0}
+  _score: 0
   _delta: 0
-  _speed: 0
+  _speed: 2
 --- !u!4 &337803169
 Transform:
   m_ObjectHideFlags: 0
