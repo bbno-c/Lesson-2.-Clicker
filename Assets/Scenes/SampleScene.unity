@@ -194,14 +194,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2743bb21aad98d40bb276d25fe0d800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cube: {fileID: 3028305257134886276, guid: 17304c4d0cfd0e14290d70bc383193ff, type: 3}
-  DisplayScore: {fileID: 1707909069}
-  amount: []
-  Destroyed: 0
-  delta: 0
-  speed: 0
-  temp: 0
-  flag: 0
+  _cubePrefab: {fileID: 3028305257134886276, guid: 17304c4d0cfd0e14290d70bc383193ff,
+    type: 3}
+  _displayScore: {fileID: 1707909069}
+  _instanceObj: {fileID: 0}
+  _amount: []
+  _destroyed: 0
+  _delta: 0
+  _speed: 0
 --- !u!4 &337803169
 Transform:
   m_ObjectHideFlags: 0

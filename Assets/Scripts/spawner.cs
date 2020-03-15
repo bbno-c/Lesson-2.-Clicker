@@ -21,12 +21,6 @@ public class Spawner : MonoBehaviour
         set => _destroyed++;
     }
 
-    void Start()
-    {
-        _speed = 2;
-        _destroyed = 0;
-    }
-
     private void Update()
     {
         _delta += Time.deltaTime;
@@ -63,7 +57,7 @@ public class Spawner : MonoBehaviour
                     GameObject.Destroy(cube_entity);
                 }
                 _destroyed = 0;
-                _speed = 2;
+                _speed = 0;
             }
         }
 
