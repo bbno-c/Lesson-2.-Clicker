@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] private GameProxy GameProxy;
     [SerializeField] private GameObject _cubePrefab;
-    [SerializeField] private GameObject _display;
     [SerializeField] private Text _displayText;
-    [SerializeField] private int _score;
     [SerializeField] private float _delta;
     [SerializeField] private float _speed;
     private float _startSpeed;
@@ -18,37 +16,24 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         _startSpeed = _speed;
-        _displayText = _display.GetComponent<Text>();
-    }
-
-    public int Score
-    {
-        get => _score;
-        set => _score++;
     }
 
     private void Update()
     {
-        
         _delta += Time.deltaTime;
         if (_delta > _speed)
         {
-            Vector3 screen_point = Camera.main.ScreenToWorldPoint(
-                new Vector2(
-                Random.Range(3f, Camera.main.pixelWidth-3),
-                Random.Range(3f, Camera.main.pixelHeight-3)
-                )
-            );
+            Vector3 screenPoint = Camera.main.ScreenToWorldPoint(new Vector2(UnityEngine.Random.Range(3f, Camera.main.pixelWidth-3),
+                UnityEngine.Random.Range(3f, Camera.main.pixelHeight-3)));
 
-            GameObject instanceObj = Instantiate(_cubePrefab, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
+            GameObject instanceObj = Instantiate(_cubePrefab, screenPoint + new Vector3(0, 0, 8), Quaternion.identity);
             instanceObj.transform.parent = gameObject.transform;
-            instanceObj.GetComponent<Cubes>().SpawnerSciptConnect(this);
 
             _delta = 0;
 
-            if (_temp != _score / 10)
+            if (_temp != GameProxy.Score / 10)
             {
-                _temp = _score / 10;
+                _temp = GameProxy.Score / 10;
                 _flag = true;
             }
             if (_flag)
@@ -59,15 +44,11 @@ public class Spawner : MonoBehaviour
 
             if (transform.childCount > 10)
             {
-                foreach (Transform child in transform)
-                {
-                    Destroy(child.gameObject);
-                }
-                _score = 0;
+                gameObject.SetActive(false);
                 _speed = _startSpeed;
             }
         }
 
-        _displayText.text = "Score: " + _score;
+        _displayText.text = "Score: " + GameProxy.Score;
     }
 }

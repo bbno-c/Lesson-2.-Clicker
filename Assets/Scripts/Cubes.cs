@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
-    [SerializeField] private Spawner _spawnerScript;
+    [SerializeField] private GameProxy GameProxy;
     private float _delta;
-
-    public void SpawnerSciptConnect(Spawner spawnerScript)
-    {
-        _spawnerScript = spawnerScript;
-    }
 
     private void OnMouseDown()
     {
         gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-        _spawnerScript.Score++;
+        GameProxy.AddScore();
+    }
+
+    private void OnDisable()
+    {
+        Destroy(gameObject);
     }
 
     private void Update()

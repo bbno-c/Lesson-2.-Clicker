@@ -123,6 +123,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446d0515bb024194896654b4b08f1f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherGameObject: {fileID: 2498446719432631785, guid: 6b3a0546df7131f478c05ca69de27935,
-    type: 3}
-  delta: 0
+  GameProxy: {fileID: 11400000, guid: 6898cc59fcbe61f4f95d1ab741fcab7f, type: 2}
