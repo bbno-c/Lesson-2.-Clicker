@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameProxy GameProxy;
     [SerializeField] private GameObject _cubePrefab;
+    [SerializeField] private GameObject _display;
     [SerializeField] private Text _displayText;
     [SerializeField] private float _delta;
     [SerializeField] private float _speed;
@@ -16,6 +17,16 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         _startSpeed = _speed;
+    }
+
+    private void OnDisable()
+    {
+        _display.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        _display.SetActive(true);
     }
 
     private void Update()
@@ -46,6 +57,7 @@ public class Spawner : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 _speed = _startSpeed;
+                GameProxy.EndGame();
             }
         }
 
