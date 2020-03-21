@@ -7,9 +7,9 @@ public class Cubes : MonoBehaviour
     [SerializeField] private Spawner _spawnerScript;
     private float _delta;
 
-    private void Start()
+    public void SpawnerSciptConnect(Spawner spawnerScript)
     {
-        _spawnerScript = transform.GetComponentInParent<Spawner>();
+        _spawnerScript = spawnerScript;
     }
 
     private void OnMouseDown()

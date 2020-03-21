@@ -7,7 +7,6 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject _cubePrefab;
     [SerializeField] private GameObject _display;
-    [SerializeField] private GameObject _instanceObj;
     [SerializeField] private Text _displayText;
     [SerializeField] private int _score;
     [SerializeField] private float _delta;
@@ -36,13 +35,14 @@ public class Spawner : MonoBehaviour
         {
             Vector3 screen_point = Camera.main.ScreenToWorldPoint(
                 new Vector2(
-                    Random.Range(3f, Camera.main.pixelWidth-3),
-                    Random.Range(3f, Camera.main.pixelHeight-3)
-                    )
-                );
+                Random.Range(3f, Camera.main.pixelWidth-3),
+                Random.Range(3f, Camera.main.pixelHeight-3)
+                )
+            );
 
-            _instanceObj = Instantiate(_cubePrefab, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
-            _instanceObj.transform.parent = gameObject.transform;
+            GameObject instanceObj = Instantiate(_cubePrefab, screen_point + new Vector3(0, 0, 8), Quaternion.identity);
+            instanceObj.transform.parent = gameObject.transform;
+            instanceObj.GetComponent<Cubes>().SpawnerSciptConnect(this);
 
             _delta = 0;
 
