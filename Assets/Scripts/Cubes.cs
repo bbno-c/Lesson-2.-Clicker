@@ -5,17 +5,19 @@ using UnityEngine;
 public class Cubes : MonoBehaviour
 {
     [SerializeField] private GameProxy GameProxy;
+    public static System.Action<GameObject> CubeGrown;
+    public Vector3 StartScale;
     private float _delta;
+
+    private void Start()
+    {
+        StartScale = gameObject.transform.localScale;
+    }
 
     private void OnMouseDown()
     {
         gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
         GameProxy.AddScore();
-    }
-
-    private void OnDisable()
-    {
-        Destroy(gameObject);
     }
 
     private void Update()
@@ -30,7 +32,7 @@ public class Cubes : MonoBehaviour
 
             if (gameObject.transform.localScale.x > 3)
             {
-                Destroy(gameObject);
+                CubeGrown?.Invoke(gameObject);
             }
         }
     }
