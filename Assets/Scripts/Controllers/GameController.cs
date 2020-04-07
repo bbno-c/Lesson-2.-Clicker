@@ -4,21 +4,21 @@ using Core;
 
 namespace Controllers
 {
-	interface IGameView : IView
+	public interface IGameView
 	{
-		event Action PlayerDeadEvent;
-		event Action<float> PlayerHealthChangeEvent;
+		public event Action EndGameEvent;
+
+		IEndGameView EndGameView { get; }
 
 		void StartGame();
 		void StopGame();
-
-		IHudView HudView { get; }
-		IMenuView MenuView { get; }
 	}
 
 	[CreateAssetMenu(menuName = "Game Proxy")]
 	public class GameController : ScriptableObject, IGame
 	{
+		private IGameView _view;
+
 		[SerializeField] private bool _resetOnNewGame = true;
 
 		public event Action EndGameEvent;
@@ -63,12 +63,25 @@ namespace Controllers
 			{
 				_best = _score;
 			}
+
+			_view?.EndGameView?.Open(new EndGameController(this, _score));
 			EndGameEvent?.Invoke();
 		}
 
 		public void NewGame()
 		{
 			NewGameEvent?.Invoke();
+		}
+
+		public void OnOpen(IGameView view)
+		{
+			view.EndGameEvent += EndGame;
+		}
+
+		public void OnClose(IGameView view)
+		{
+			view.EndGameEvent -= EndGame;
+			_view = null;
 		}
 	}
 }

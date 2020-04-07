@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Controllers;
+using System;
 
 namespace Objects
 {
@@ -9,6 +10,9 @@ namespace Objects
         [SerializeField] private GameController GameProxy;
 
         [SerializeField] private GameObject _cubePrefab;
+
+        public event Action GameOver;
+
         [SerializeField] private Dictionary<GameObject, Cubes> _cubes;
         [SerializeField] private Queue<GameObject> _cubesToShow;
         [SerializeField] private int _poolCount;
@@ -28,7 +32,7 @@ namespace Objects
             {
                 var prefab = Instantiate(_cubePrefab);
                 var script = prefab?.GetComponent<Cubes>();
-                script.CubeClickedEvent += ;
+                script.CubeClickedEvent += OnCubeClicked;
                 script.CubeGrownEvent += OnCubeGrown;
                 prefab.SetActive(false);
                 _cubes.Add(prefab, script);
@@ -54,7 +58,8 @@ namespace Objects
         {
             if (!(_cubesToShow.Count > 0))
             {
-                EndGame();
+                GameOver.Invoke();
+                StopSpawner();
             }
 
             Vector3 screenPoint = Camera.main.ScreenToWorldPoint(new Vector2(UnityEngine.Random.Range(3f, Camera.main.pixelWidth - 3),
@@ -89,7 +94,7 @@ namespace Objects
             GameProxy.AddScore(1);
         }
 
-        void EndGame()
+        void StopSpawner()
         {
             foreach (KeyValuePair<GameObject, Cubes> obj in _cubes)
             {
