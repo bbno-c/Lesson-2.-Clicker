@@ -9,45 +9,56 @@ namespace Objects
         public event Action<GameObject> CubeGrownEvent;
         public event Action CubeClickedEvent;
 
-        private ParticleSystem _effect;
-        private BoxCollider _boxCollider;
-        private MeshRenderer _meshRenderer;
+        [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private BoxCollider _boxCollider;
+        [SerializeField] private MeshRenderer _meshRenderer;
 
-        private Vector3 _startScale;
+        [SerializeField] private Vector3 _startScale;
         private float _delta;
+        private bool cubeGrown;
 
         private void Start()
         {
             _startScale = gameObject.transform.localScale;
+            cubeGrown = false;
         }
 
-        private void Awake()
+        private void OnDisable()
         {
+            _boxCollider.enabled = true;
+            _meshRenderer.enabled = true;
             gameObject.transform.localScale = _startScale;
+            cubeGrown = false;
+            CubeGrownEvent?.Invoke(gameObject);
         }
 
         private void OnMouseDown()
         {
-            gameObject.transform.localScale += new Vector3(1.5f, 1.5f, 1.5f);
+            gameObject.transform.localScale += new Vector3(0.8f, 0.8f, 0.8f);
             CubeClickedEvent?.Invoke();
         }
 
         private void Update()
         {
             _delta += Time.deltaTime;
-            if (_delta > 1)
-            {
-                gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
-
-                _delta = 0;
-            }
+            
         }
 
         private void FixedUpdate()
         {
-            if (gameObject.transform.localScale.x > 3)
+            if (!cubeGrown)
             {
-                StartCoroutine(CubeDestroyCoroutine());
+                if (_delta > 1)
+                {
+                    gameObject.transform.localScale += new Vector3(0.1f, 0.1f, 0.1f);
+
+                    _delta = 0;
+                }
+                if (gameObject.transform.localScale.x > 3)
+                {
+                    cubeGrown = true;
+                    StartCoroutine(CubeDestroyCoroutine());
+                }
             }
         }
 
@@ -58,10 +69,8 @@ namespace Objects
             _effect.Play();
             Debug.Log(_effect.main.startLifetime.constantMin);
             yield return new WaitForSeconds(_effect.main.startLifetime.constantMin);
-            _boxCollider.enabled = true;
-            _meshRenderer.enabled = true;
-            gameObject.transform.localScale = _startScale;
-            CubeGrownEvent?.Invoke(gameObject);
+            
+            gameObject.SetActive(false);
         }
     }
 }

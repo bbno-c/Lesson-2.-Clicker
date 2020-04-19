@@ -6,15 +6,16 @@ namespace Controllers
 {
 	public interface IGameView
 	{
-		public event Action EndGameEvent;
+		event Action EndGameEvent;
 
-		IEndGameView EndGameView { get; }
+		IHudView HudView { get; }
+		IMenuView MenuView { get; }
 
 		void StartGame();
 		void StopGame();
 	}
 
-	[CreateAssetMenu(menuName = "Game Proxy")]
+	[CreateAssetMenu(menuName = "GameController")]
 	public class GameController : ScriptableObject, IGame
 	{
 		private IGameView _view;
@@ -22,7 +23,6 @@ namespace Controllers
 		[SerializeField] private bool _resetOnNewGame = true;
 
 		public event Action EndGameEvent;
-		public event Action NewGameEvent;
 		public event Action<int> ScoreChangedEvent;
 
 		private int _score { get; set; }
@@ -57,30 +57,35 @@ namespace Controllers
 			return _best;
 		}
 
-		public void EndGame()
+		public void NewGame()
+		{
+			_score = 0;
+			_view?.HudView?.Open(new HudController(this));
+			_view?.StartGame();
+		}
+
+		public void OnEndGame()
 		{
 			if (_score > _best)
 			{
 				_best = _score;
 			}
 
-			_view?.EndGameView?.Open(new EndGameController(this, _score));
+			_view?.StopGame();
+			_view?.HudView.EndGameView?.Open(new EndGameController(this, _score, _best));
 			EndGameEvent?.Invoke();
-		}
-
-		public void NewGame()
-		{
-			NewGameEvent?.Invoke();
 		}
 
 		public void OnOpen(IGameView view)
 		{
-			view.EndGameEvent += EndGame;
+			view.EndGameEvent += OnEndGame;
+			view.MenuView?.Open(new MenuController(this));
+			_view = view;
 		}
 
 		public void OnClose(IGameView view)
 		{
-			view.EndGameEvent -= EndGame;
+			view.EndGameEvent -= OnEndGame;
 			_view = null;
 		}
 	}

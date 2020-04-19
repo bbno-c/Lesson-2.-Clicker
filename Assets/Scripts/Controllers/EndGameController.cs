@@ -7,7 +7,7 @@ namespace Controllers
 	{
 		event Action ReplayEvent;
 
-		void SetScore(int value);
+		void SetScore(int value, int bestValue);
 	}
 
 	public class EndGameController : IController<IEndGameView>
@@ -17,16 +17,18 @@ namespace Controllers
 		private IEndGameView _view;
 
 		private readonly int _score;
+		private readonly int _bestScore;
 
-		public EndGameController(IGame game, int score)
+		public EndGameController(IGame game, int score, int bestScore)
 		{
 			_gameProxy = game;
 			_score = score;
+			_bestScore = bestScore;
 		}
 
 		public void OnOpen(IEndGameView view)
 		{
-			view.SetScore(_score);
+			view.SetScore(_score, _bestScore);
 			view.ReplayEvent += OnReplay;
 			_view = view;
 		}

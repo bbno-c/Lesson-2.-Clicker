@@ -30,13 +30,13 @@ namespace Objects
 
             for (int i = 0; i < _poolCount; i++)
             {
-                var prefab = Instantiate(_cubePrefab);
-                var script = prefab?.GetComponent<Cubes>();
+                var cubeObject = Instantiate(_cubePrefab);
+                var script = cubeObject?.GetComponent<Cubes>();
                 script.CubeClickedEvent += OnCubeClicked;
                 script.CubeGrownEvent += OnCubeGrown;
-                prefab.SetActive(false);
-                _cubes.Add(prefab, script);
-                _cubesToShow.Enqueue(prefab);
+                cubeObject.SetActive(false);
+                _cubes.Add(cubeObject, script);
+                _cubesToShow.Enqueue(cubeObject);
             }
             _startSpeed = _speed;
         }
@@ -62,8 +62,10 @@ namespace Objects
                 StopSpawner();
             }
 
-            Vector3 screenPoint = Camera.main.ScreenToWorldPoint(new Vector2(UnityEngine.Random.Range(3f, Camera.main.pixelWidth - 3),
-                UnityEngine.Random.Range(3f, Camera.main.pixelHeight - 3)));
+            Vector3 screenPoint = Camera.main.ScreenToWorldPoint(
+                new Vector2(UnityEngine.Random.Range(3f, Camera.main.pixelWidth - 3),
+                UnityEngine.Random.Range(3f, Camera.main.pixelHeight - 3))
+                );
 
             var cube = _cubesToShow.Dequeue();
             cube.transform.position = screenPoint + new Vector3(0, 0, 8);

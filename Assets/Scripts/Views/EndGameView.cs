@@ -1,5 +1,6 @@
 ﻿using System;
-using UnityEngine.UI;
+using TMPro;
+using UnityEngine;
 using Controllers;
 
 namespace Views
@@ -8,13 +9,15 @@ namespace Views
 	{
 		protected override IEndGameView View => this;
 
-		public Text ScoreText;
+		public TextMeshProUGUI ScoreText;
+		public TextMeshProUGUI BestScore;
 
 		public event Action ReplayEvent;
 
-		public void SetScore(int value)
+		public void SetScore(int value, int bestValue)
 		{
 			ScoreText.text = value.ToString();
+			BestScore.text = bestValue.ToString();
 		}
 
 		public void ActionReplay()

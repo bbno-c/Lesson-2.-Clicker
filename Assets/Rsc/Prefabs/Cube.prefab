@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3028305257134886297}
   - component: {fileID: 3028305257134886278}
   - component: {fileID: 3028305257134886279}
-  - component: {fileID: -1118449113133721164}
+  - component: {fileID: 3422983773273904751}
   - component: {fileID: 6971821557517402591}
   - component: {fileID: 6018700755685413222}
   m_Layer: 0
@@ -113,7 +113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1118449113133721164
+--- !u!114 &3422983773273904751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446d0515bb024194896654b4b08f1f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameProxy: {fileID: 11400000, guid: 6898cc59fcbe61f4f95d1ab741fcab7f, type: 2}
-  effect: {fileID: 6971821557517402591}
-  boxCollider: {fileID: 3028305257134886278}
-  meshRenderer: {fileID: 3028305257134886297}
-  StartScale: {x: 0, y: 0, z: 0}
+  _effect: {fileID: 6971821557517402591}
+  _boxCollider: {fileID: 3028305257134886278}
+  _meshRenderer: {fileID: 3028305257134886297}
+  _startScale: {x: 1, y: 1, z: 1}
 --- !u!198 &6971821557517402591
 ParticleSystem:
   m_ObjectHideFlags: 0

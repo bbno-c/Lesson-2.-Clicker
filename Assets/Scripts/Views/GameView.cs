@@ -13,45 +13,42 @@ namespace Views
 		public GameObject[] GameObjects;
 
 		public Spawner Spawner;
+		public GameObject SpawnerObject;
 
-		[SerializeField] private EndGameView _endGameView;
+		[SerializeField]
+		public MenuView _menuView;
+		[SerializeField]
+		private HudView _hudView;
 
-		public Text ScoreText;
-
-		public IEndGameView EndGameView => _endGameView;
+		public IHudView HudView => _hudView;
+		public IMenuView MenuView => _menuView;
 
 		public event Action EndGameEvent;
 
 		private void OnEnable()
 		{
 			Controller.OnOpen(this);
-			Controller.ScoreChangedEvent += SetScore;
 		}
 
 		private void OnDisable()
 		{
-			Controller.ScoreChangedEvent -= SetScore;
 			Controller.OnClose(this);
-		}
-
-		public void SetScore(int value)
-		{
-			ScoreText.text = value.ToString();
 		}
 
 		public void StartGame()
 		{
 			Spawner.GameOver += EndGame;
+			SpawnerObject.SetActive(true);
 			foreach (var o in GameObjects)
 			{
 				o.SetActive(true); 
-				
 			}
 		}
 
 		public void StopGame()
 		{
 			Spawner.GameOver -= EndGame;
+			SpawnerObject.SetActive(false);
 			foreach (var o in GameObjects)
 				o.SetActive(false);
 		}
