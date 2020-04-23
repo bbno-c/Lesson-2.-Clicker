@@ -395,7 +395,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 15, y: 1, z: 10}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: -4.5, z: 0}
 --- !u!4 &284267857
 Transform:
   m_ObjectHideFlags: 0
@@ -1541,7 +1541,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.6650944, g: 0.89867586, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.1980242, g: 0.38798606, b: 0.4716981, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1558,7 +1558,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 3.9792666
+  orthographic size: 3.8792903
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1661,7 +1661,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 15, y: 1, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Center: {x: 0, y: 4.5, z: 0}
 --- !u!4 &1105599458
 Transform:
   m_ObjectHideFlags: 0

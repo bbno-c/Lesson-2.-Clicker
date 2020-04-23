@@ -23,13 +23,17 @@ namespace Objects
             cubeGrown = false;
         }
 
-        private void OnDisable()
+        private void OnEnable()
         {
+            cubeGrown = false;
             _boxCollider.enabled = true;
             _meshRenderer.enabled = true;
+            
+        }
+
+        private void OnDisable()
+        {
             gameObject.transform.localScale = _startScale;
-            cubeGrown = false;
-            CubeGrownEvent?.Invoke(gameObject);
         }
 
         private void OnMouseDown()
@@ -41,7 +45,6 @@ namespace Objects
         private void Update()
         {
             _delta += Time.deltaTime;
-            
         }
 
         private void FixedUpdate()
@@ -57,6 +60,10 @@ namespace Objects
                 if (gameObject.transform.localScale.x > 3)
                 {
                     cubeGrown = true;
+                    _boxCollider.enabled = false;
+                    _meshRenderer.enabled = false;
+                    _effect.Play();
+                    Debug.Log(_effect.main.startLifetime.constantMin);
                     StartCoroutine(CubeDestroyCoroutine());
                 }
             }
@@ -64,13 +71,9 @@ namespace Objects
 
         private IEnumerator CubeDestroyCoroutine()
         {
-            _boxCollider.enabled = false;
-            _meshRenderer.enabled = false;
-            _effect.Play();
-            Debug.Log(_effect.main.startLifetime.constantMin);
             yield return new WaitForSeconds(_effect.main.startLifetime.constantMin);
             
-            gameObject.SetActive(false);
+            CubeGrownEvent?.Invoke(gameObject);
         }
     }
 }

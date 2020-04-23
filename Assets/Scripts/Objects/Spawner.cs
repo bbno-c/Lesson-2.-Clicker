@@ -20,8 +20,8 @@ namespace Objects
         [SerializeField] private float _speed;
         private float _delta;
         private float _startSpeed;
-        private int _temp;
-        private bool _flag;
+        private int _previousScore;
+        private bool _gameInStop;
 
         private void Start()
         {
@@ -39,6 +39,12 @@ namespace Objects
                 _cubesToShow.Enqueue(cubeObject);
             }
             _startSpeed = _speed;
+            _gameInStop = false;
+        }
+
+        private void OnEnable()
+        {
+            _gameInStop = false;
         }
 
         private void Update()
@@ -48,7 +54,7 @@ namespace Objects
 
         private void FixedUpdate()
         {
-            if (_delta > _speed)
+            if (_delta >= _speed)
             {
                 CubeSpawn();
             }
@@ -56,10 +62,15 @@ namespace Objects
 
         private void CubeSpawn()
         {
+            if(_gameInStop)
+            {
+                return;
+            }
+
             if (!(_cubesToShow.Count > 0))
             {
-                GameOver.Invoke();
                 StopSpawner();
+                return;
             }
 
             Vector3 screenPoint = Camera.main.ScreenToWorldPoint(
@@ -73,22 +84,18 @@ namespace Objects
 
             _delta = 0;
 
-            if (_temp != GameProxy.GetScore() / 10)
+            if (_previousScore != GameProxy.GetScore() / 10)
             {
-                _temp = GameProxy.GetScore() / 10;
-                _flag = true;
-            }
-            if (_flag)
-            {
+                _previousScore = GameProxy.GetScore() / 10;
                 _speed -= 0.05f;
-                _flag = false;
             }
         }
 
         private void OnCubeGrown(GameObject cube)
         {
-            cube.SetActive(false);
             _cubesToShow.Enqueue(cube);
+            
+            cube.SetActive(false);
         }
 
         private void OnCubeClicked()
@@ -98,12 +105,13 @@ namespace Objects
 
         void StopSpawner()
         {
+            _gameInStop = true;
             foreach (KeyValuePair<GameObject, Cubes> obj in _cubes)
             {
                 OnCubeGrown(obj.Key);
             }
             _speed = _startSpeed;
-            gameObject.SetActive(false);
+            GameOver.Invoke();
         }
     }
 }
